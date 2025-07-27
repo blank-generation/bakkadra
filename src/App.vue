@@ -22,6 +22,10 @@ import AddNode from './nodes/blends/AddNode'
 import SubNode from './nodes/blends/SubNode'
 import DiffNode from './nodes/blends/DiffNode'
 import MultNode from './nodes/blends/MultNode'
+import KaliedNode from './nodes/transforms/KaliedNode'
+import PixelateNode from './nodes/transforms/PixelateNode'
+import RepeatNode from './nodes/transforms/ReapeatNode'
+
 
 // Import Hydra executor
 import HydraExecutor from './services/HydraExecutor'
@@ -29,7 +33,7 @@ import OutputAsInNode from './nodes/sources/OutputAsInNode';
 
 const baklava = useBaklava();
 
-baklava.settings.sidebar.enabled = false;
+baklava.settings.sidebar.width = 150;
 baklava.settings.nodes.resizable = true;
 
 const engine = new DependencyEngine(baklava.editor);
@@ -53,15 +57,20 @@ baklava.editor.registerNodeType(TextureNode);
 baklava.editor.registerNodeType(InitScreenNode);
 baklava.editor.registerNodeType(InitCamNode);
 
-baklava.editor.registerNodeType(AddNode);
-baklava.editor.registerNodeType(SubNode);
-baklava.editor.registerNodeType(DiffNode);
-baklava.editor.registerNodeType(MultNode);
+// baklava.editor.registerNodeType(AddNode);
+// baklava.editor.registerNodeType(SubNode);
+// baklava.editor.registerNodeType(DiffNode);
+// baklava.editor.registerNodeType(MultNode);
 
 baklava.editor.registerNodeType(RotateNode);
 baklava.editor.registerNodeType(ScaleNode);
 baklava.editor.registerNodeType(BlendNode);
 baklava.editor.registerNodeType(ColorNode);
+baklava.editor.registerNodeType(KaliedNode);
+baklava.editor.registerNodeType(PixelateNode);
+baklava.editor.registerNodeType(RepeatNode);
+
+
 baklava.editor.registerNodeType(ModulateNode);
 baklava.editor.registerNodeType(OutputNode);
 
@@ -205,14 +214,14 @@ onMounted(() => {
         {{ isExecuting ? 'Executing...' : 'Execute Graph' }}
       </button> -->
       
-      <button 
+      <!-- <button 
         @click="clearOutputs"
         style="padding: 15px 25px; background: #f44336; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);"
       >
         Clear Outputs
-      </button>
+      </button> -->
       
-      <button 
+      <!-- <button 
         @click="usePopup = !usePopup"
         :style="{ 
           padding: '15px 25px', 
@@ -226,8 +235,8 @@ onMounted(() => {
         }"
       >
         {{ usePopup ? 'Popup Mode' : 'Background Mode' }}
-      </button>
-      
+      </button> -->
+<!--       
               <button 
          @click="openPopup()"
           v-if="usePopup"
@@ -243,7 +252,7 @@ onMounted(() => {
           }"
         >
           {{ HydraExecutor.isPopupOpen() ? 'Focus Popup' : 'Open Popup Window' }}
-        </button>
+        </button> -->
       
       <!-- Status Display -->
       <div style="background: rgba(0,0,0,0.8); color: white; padding: 10px; border-radius: 8px; font-size: 12px; max-width: 200px;">
@@ -270,10 +279,10 @@ onMounted(() => {
 /* Add any additional styles here */
 #canvas {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 60px;
+  left: 150px;
+  width: calc(100vw - 150px);
+  height: calc(100vh - 60px);
   z-index: -1;
   background: #000;
 }

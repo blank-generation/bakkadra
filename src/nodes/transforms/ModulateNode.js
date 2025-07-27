@@ -6,7 +6,7 @@ export default defineNode({
     inputs: {
         input: () => new NodeInterface("Input", ""),
         modulator: () => new NodeInterface("Modulator", ""),
-        mode: () => new SelectInterface("Mode", "default", ["default", "rotate", "scale", "scrollX", "scrollY","pixelate","kaleid"]),
+        mode: () => new SelectInterface("Mode", "default", ["default", "rotate", "scale", "scrollX", "scrollY","pixelate","kaleid","hue","repeatX","repeatY"]),
         amount: () => new NumberInterface("Amount", 0.1),
         parameter: () => new NumberInterface("Parameter", 0.1),
     
@@ -36,6 +36,15 @@ export default defineNode({
         else if (mode === "kaleid") {
             // modulateKaleid( texture, nSides = 4 )
             return { output: `${input}.modulateKaleid(${modulator}, ${amount}, ${parameter})` };
+        } else if (mode === "hue") {
+            // modulateHue( texture, amount = 1 )
+            return { output: `${input}.modulateHue(${modulator}, ${amount})` };
+        } else if (mode === "repeatX") {
+            // modulateRepeatX( texture, reps = 3, offset = 0.5 )
+            return { output: `${input}.modulateRepeatX(${modulator}, ${amount}, ${parameter})` };
+        } else if (mode === "repeatY") {
+            // modulateRepeatY( texture, reps = 3, offset = 0.5 )
+            return { output: `${input}.modulateRepeatY(${modulator}, ${amount}, ${parameter})` };
         }
     },
 }); 

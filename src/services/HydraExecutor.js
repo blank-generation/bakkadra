@@ -20,8 +20,8 @@ class HydraExecutor {
 
         this.hydra = new Hydra({
             canvas: canvas,
-            width: 1280,
-            height: 720,
+            width: 1920,
+            height: 1080,
             autoLoop: true,
             makeGlobal: true,
             detectAudio: false, // Set to false to avoid microphone permission requests
@@ -107,7 +107,7 @@ class HydraExecutor {
         this.popupWindow = window.open(
             '',
             windowId,
-            'width=1280,height=720,resizable=yes,scrollbars=no,status=no,location=no,toolbar=no,menubar=no'
+            'width=1920,height=1080,resizable=yes,scrollbars=no,status=no,location=no,toolbar=no,menubar=no'
         );
 
         if (!this.popupWindow) {
@@ -235,6 +235,10 @@ class HydraExecutor {
 
             // Execute the code in the global scope where Hydra functions are available
             const result = eval(code);
+            if(code.includes('out(o1)') || code.includes('out(o2)') || code.includes('out(o3)') || code.includes('out(o4)')) {
+                // run render() on the hydra instance
+                render();
+            } 
             
             console.log('Executed Hydra code:', code);
             return result;
@@ -252,6 +256,7 @@ class HydraExecutor {
             this.hydra.synth.o1.clear();
             this.hydra.synth.o2.clear();
             this.hydra.synth.o3.clear();
+            // render(o0);
         }
         
         // Also clear popup if it exists
@@ -260,6 +265,8 @@ class HydraExecutor {
             this.popupHydra.synth.o1.clear();
             this.popupHydra.synth.o2.clear();
             this.popupHydra.synth.o3.clear();
+            // render(o0);
+
         }
     }
 
