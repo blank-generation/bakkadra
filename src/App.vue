@@ -279,10 +279,10 @@ onMounted(() => {
 /* Add any additional styles here */
 #canvas {
   position: fixed;
-  top: 60px;
+  top: 40px;
   left: 150px;
   width: calc(100vw - 150px);
-  height: calc(100vh - 60px);
+  height: calc(100vh - 40px);
   z-index: -1;
   background: #000;
 }
